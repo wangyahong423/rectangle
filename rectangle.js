@@ -1,16 +1,37 @@
-/**
- * 小数点后面保留第 n 位
- *
- * @param x 做近似处理的数
- * @param n 小数点后第 n 位
- * @returns 近似处理后的数 
- */
-/* global Rectangle: true */
 $(function() {
   var $width = $('#width');
   var $height = $('#height');
+  var $btnCal = $('.calculate');
   var $area = $('#area');
+  var $perimeter = $('#perimeter');
+  $widthValidate = $('#width-validate'),
+      $heightValidate = $('#height-validate'),
+      isPassValidate = false;
+
+  $width.focusout(function() {
+    var result = validate($width.val());
+    isPassValidate = result.isOK;
+    if(!result.isOK) {
+      $widthValidate.html('宽度' + result.reason);
+      $width.select();
+    } else {
+      $widthValidate.html('');
+    }
+  });
+
+  $height.focusout(function() {
+    var result = validate($height.val());
+    isPassValidate = result.isOK;
+    if(!result.isOK) {
+      $heightValidate.html('高度' + result.reason);
+      $height.select();
+    } else {
+      $heightValidate.html('');
+    }
+  });
+
   $btnCal.click(function(){
+    if(!isPassValidate) return;
     var w = $width.val(),
         h = $height.val();
     var r = new Rectangle(w,h);
