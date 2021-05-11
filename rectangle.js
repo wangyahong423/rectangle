@@ -1,0 +1,1 @@
+$(function(){var t=$("#width"),i=$("#height"),l=$("#area");$btnCal.click(function(){var a=t.val(),e=i.val(),r=new Rectangle(a,e);$perimeter.val(r.perimeter()),l.val(r.area())})});
